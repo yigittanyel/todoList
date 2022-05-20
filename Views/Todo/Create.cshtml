@@ -1,0 +1,56 @@
+﻿@model TodoListCore.Data.Todo
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create New Action</h1>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Action" class="control-label"></label>
+                <input asp-for="Action" class="form-control" id="action" />
+                <span asp-validation-for="Action" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Completed" /> @Html.DisplayNameFor(model => model.Completed)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" id="sub" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<br />
+<div>
+    <a asp-action="Index" style="text-decoration:none;" class="btn btn-success">Back to List</a>
+</div>
+
+<script>
+    $(document).ready(function(){
+        const valueAction=$("#action");
+        
+        $('sub').click(function(){
+            let value=valueAction.val();
+            let listItem=`<li class="list-group-item">${value}</li> `
+        });
+        
+    });
+</script>
+
+
+
+
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
